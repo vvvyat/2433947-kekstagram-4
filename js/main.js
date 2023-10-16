@@ -59,4 +59,4 @@ const generatePhotoDescription = () => ({
   comments: getComments()
 });
 
-const photoDescriptions = Array.from({length: 25}, generatePhotoDescription);
+const getPhotoDescriptions = () => Array.from({length: 25}, generatePhotoDescription);
