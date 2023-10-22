@@ -42,21 +42,21 @@ const getId = getRandomId(1, 25);
 const getUrlId = getRandomId(1, 25);
 const getCommentId = getRandomId(0, 1000);
 
-const generateComment = () => ({
-  id: getCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-  message: getRandomArrayElement(messages),
-  name: getRandomArrayElement(names)
-});
+const getComments = () => (
+  Array.from({length: getRandomInteger(0, 30)}, () => ({
+    id: getCommentId(),
+    avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
+    message: getRandomArrayElement(messages),
+    name: getRandomArrayElement(names)
+  }))
+);
 
-const getComments = () => Array.from({length: getRandomInteger(0, 30)}, generateComment);
-
-const generatePhotoDescription = () => ({
-  id: getId(),
-  url: `photos/${getUrlId()}.jpg`,
-  description: getRandomArrayElement(descriptions),
-  likes: getRandomInteger(15, 200),
-  comments: getComments()
-});
-
-const getPhotoDescriptions = () => Array.from({length: 25}, generatePhotoDescription);
+const getPhotoDescriptions = () => (
+  Array.from({length: 25}, () => ({
+    id: getId(),
+    url: `photos/${getUrlId()}.jpg`,
+    description: getRandomArrayElement(descriptions),
+    likes: getRandomInteger(15, 200),
+    comments: getComments()
+  }))
+);
