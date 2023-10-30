@@ -21,3 +21,14 @@ const getNumbers = (str) => {
   }
   return res === '' ? NaN : Number(res);
 };
+
+const isEnoughTime = (start, end, meetingStart, meetingTime) => {
+  const meeting = meetingStart.split(':').map(Number);
+  meeting[0] += Math.floor(meetingTime / 60) + Math.floor((meeting[1] + meetingTime % 60) / 60);
+  meeting[1] = (meeting[1] + meetingTime % 60) % 60;
+  const workStart = start.split(':').map(Number);
+  const workEnd = end.split(':').map(Number);
+  const workStartFits = workStart[0] < meeting[0] || (workStart[0] === meeting[0] && workStart[1] <= meeting[1]);
+  const workEndFits = (workEnd[0] === meeting[0] && meeting[1] <= workEnd[1]) || workEnd[0] > meeting[0];
+  return workStartFits && workEndFits;
+};
