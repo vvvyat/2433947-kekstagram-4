@@ -1,3 +1,5 @@
 import {getPhotoDescriptions} from './photo-descriptions.js';
+import {creatMiniatures} from './draw-miniatures.js';
 
-getPhotoDescriptions();
+const picturesData = getPhotoDescriptions();
+creatMiniatures(picturesData);
