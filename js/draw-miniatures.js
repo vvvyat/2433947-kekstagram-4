@@ -1,4 +1,4 @@
-const pictureTemplate = document.querySelector('#pictures').content;
+const pictureTemplate = document.querySelector('#picture').content;
 const pictures = document.querySelector('.pictures');
 
 const creatMiniatures = (picturesData) => {
