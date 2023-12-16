@@ -22,4 +22,14 @@ const messages = [
 
 const names = ['София', 'Виктория', 'Кирилл', 'Илья', 'Максим', 'Денис', 'Анастасия', 'Кира'];
 
-export {descriptions, messages, names};
+const validHashtag = /^#[a-zа-я0-9]{1,19}|^$/i;
+
+const hashtagMaxCount = 5;
+
+const hashtagErrorMessages = [
+  'Использованы недопустимые символы или допущена ошибка в форме записи',
+  'Один и тот же хэш-тег не может быть использован дважды',
+  `Максимальное количесво хеш-тегов - ${hashtagMaxCount}`
+];
+
+export {descriptions, messages, names, validHashtag, hashtagMaxCount, hashtagErrorMessages};
