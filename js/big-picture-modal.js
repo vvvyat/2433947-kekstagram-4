@@ -91,7 +91,9 @@ function closeBigPicture () {
 
 const renderBigPicture = () => {
   pictures.addEventListener('click', (evt) => {
-    openBigPicture(evt);
+    if (!evt.target.closest('.img-upload')) {
+      openBigPicture(evt);
+    }
   });
 };
 
