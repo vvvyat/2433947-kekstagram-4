@@ -1,5 +1,7 @@
 import {isEscapeKey} from './util.js';
-import {validHashtag, hashtagMaxCount, hashtagErrorMessages} from './constants.js';
+import {validHashtag, hashtagMaxCount, hashtagErrorMessages, maxScaleValue} from './constants.js';
+import {setCurrentScale, imgUploadPreview} from './scale-picture.js';
+import {slider} from './filters.js';
 
 const body = document.body;
 const uploadForm = document.querySelector('.img-upload__form');
@@ -51,6 +53,11 @@ const onDocumentKeydown = (evt) => {
 function openUploadModal () {
   uploadModal.classList.remove('hidden');
   body.classList.remove('modal-open');
+
+  setCurrentScale(maxScaleValue);
+  imgUploadPreview.style.transform = `scale(${maxScaleValue / 100})`;
+  imgUploadPreview.style.filter = null;
+  slider.classList.add('hidden');
 
   closeFormButton.addEventListener('click', closeUploadModal);
   document.addEventListener('keydown', onDocumentKeydown);

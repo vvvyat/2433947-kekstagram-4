@@ -32,4 +32,8 @@ const hashtagErrorMessages = [
   `Максимальное количесво хеш-тегов - ${hashtagMaxCount}`
 ];
 
-export {descriptions, messages, names, validHashtag, hashtagMaxCount, hashtagErrorMessages};
+const maxScaleValue = 100;
+const minScaleValue = 25;
+const scaleStep = 25;
+
+export {descriptions, messages, names, validHashtag, hashtagMaxCount, hashtagErrorMessages, maxScaleValue, minScaleValue, scaleStep};
