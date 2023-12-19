@@ -1,5 +1,4 @@
 import {pictures} from './draw-miniatures.js';
-import {picturesData} from './main.js';
 import {isEscapeKey} from './util.js';
 
 const body = document.querySelector('body');
@@ -48,7 +47,7 @@ const onCommentsLoaderClick = () => {
   loadComments();
 };
 
-const createBigPictureData = (evt) => {
+const createBigPictureData = (evt, picturesData) => {
   const miniature = picturesData.find((picture) => picture.id === Number(evt.target.id));
   bigPicture.querySelector('.big-picture__img img').src = miniature.url;
   bigPicture.querySelector('.likes-count').textContent = miniature.likes;
@@ -65,11 +64,11 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
-function openBigPicture (evt) {
+function openBigPicture (evt, picturesData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  createBigPictureData(evt);
+  createBigPictureData(evt, picturesData);
 
   closeButton.addEventListener('click', closeBigPicture);
   document.addEventListener('keydown', (event) => {
@@ -89,10 +88,10 @@ function closeBigPicture () {
   commentsLoader.removeEventListener('click', onCommentsLoaderClick);
 }
 
-const renderBigPicture = () => {
+const renderBigPicture = (picturesData) => {
   pictures.addEventListener('click', (evt) => {
     if (!evt.target.closest('.img-upload')) {
-      openBigPicture(evt);
+      openBigPicture(evt, picturesData);
     }
   });
 };
