@@ -2,6 +2,9 @@ import {creatMiniatures} from './draw-miniatures.js';
 import {renderBigPicture} from './big-picture-modal.js';
 import {showSuccessMessage, showErrorMessage, showLoadErrorMessage} from './fetch-messages.js';
 import {closeUploadModal, uploadModal, imgUploadSubmit} from './upload-form.js';
+import {imgFilters, setFilterDefaultClick, setFilterRandomClick, setFilterDiscussedClick,
+  onFilterDefault, onFilterRandom, onFilterDiscussed} from './img-filters.js';
+import {debounce} from './util.js';
 
 const loadData = () => fetch('https://29.javascript.pages.academy/kekstagram/data')
   .then((response) => {
@@ -13,6 +16,10 @@ const loadData = () => fetch('https://29.javascript.pages.academy/kekstagram/dat
   .then((picturesData) => {
     creatMiniatures(picturesData);
     renderBigPicture(picturesData);
+    imgFilters.classList.remove('img-filters--inactive');
+    setFilterDefaultClick(debounce(() => onFilterDefault(picturesData)));
+    setFilterRandomClick(debounce(() => onFilterRandom(picturesData)));
+    setFilterDiscussedClick(debounce(() => onFilterDiscussed(picturesData)));
   })
   .catch(() => showLoadErrorMessage());
 
