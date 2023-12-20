@@ -12,4 +12,6 @@ const maxScaleValue = 100;
 const minScaleValue = 25;
 const scaleStep = 25;
 
-export {validHashtag, hashtagMaxCount, hashtagErrorMessages, maxScaleValue, minScaleValue, scaleStep};
+const shownRandomCount = 10;
+
+export {validHashtag, hashtagMaxCount, hashtagErrorMessages, maxScaleValue, minScaleValue, scaleStep, shownRandomCount};
