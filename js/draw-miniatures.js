@@ -1,5 +1,5 @@
 const pictureTemplate = document.querySelector('#picture').content;
-const pictures = document.querySelector('.pictures');
+const picturesContainer = document.querySelector('.pictures');
 
 const creatMiniatures = (picturesData) => {
   const fragment = document.createDocumentFragment();
@@ -15,7 +15,7 @@ const creatMiniatures = (picturesData) => {
     fragment.appendChild(newPicture);
   });
 
-  pictures.appendChild(fragment);
+  picturesContainer.appendChild(fragment);
 };
 
-export {creatMiniatures, pictures};
+export {creatMiniatures, picturesContainer};

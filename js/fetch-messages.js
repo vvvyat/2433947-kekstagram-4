@@ -58,8 +58,8 @@ const showLoadErrorMessage = () => {
         <button type="button" class="error__button">Ок</button>
       </div>`;
   body.appendChild(message);
-
   const errorButton = document.querySelector('.error__button');
+
   errorButton.addEventListener('click', closeMessage);
   document.addEventListener('keydown', onDocumentKeydown);
   document.addEventListener('click', onDocumentClick);

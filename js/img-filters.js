@@ -1,8 +1,8 @@
 import {shuffleArray} from './util.js';
-import {shownRandomCount} from './constants.js';
+import {SHOWN_RANDOM_COUNT} from './constants.js';
 import {creatMiniatures} from './draw-miniatures.js';
 
-const imgFilters = document.querySelector('.img-filters');
+const imgFiltersContainer = document.querySelector('.img-filters');
 const filterDefaultButton = document.querySelector('#filter-default');
 const filterRandomButton = document.querySelector('#filter-random');
 const filterDiscussedButton = document.querySelector('#filter-discussed');
@@ -22,7 +22,7 @@ const onFilterRandom = (picturesData) => {
   const activeFilter = document.querySelector('.img-filters__button--active');
   activeFilter.classList.remove('img-filters__button--active');
   filterRandomButton.classList.add('img-filters__button--active');
-  const randomPicturesData = shuffleArray(picturesData).slice(0, shownRandomCount);
+  const randomPicturesData = shuffleArray(picturesData).slice(0, SHOWN_RANDOM_COUNT);
   const createdMiniatures = document.querySelectorAll('.picture');
   for (const miniature of createdMiniatures) {
     miniature.remove();
@@ -61,5 +61,5 @@ const setFilterDiscussedClick = (cb) => {
   });
 };
 
-export {imgFilters, setFilterDefaultClick, setFilterRandomClick, setFilterDiscussedClick,
+export {imgFiltersContainer, setFilterDefaultClick, setFilterRandomClick, setFilterDiscussedClick,
   onFilterDefault, onFilterRandom, onFilterDiscussed};

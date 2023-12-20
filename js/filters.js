@@ -1,4 +1,4 @@
-import {imgUploadPreview} from './scale-picture.js';
+import {imgUploadPreviewContainer} from './scale-picture.js';
 
 const slider = document.querySelector('.img-upload__effect-level');
 const effectNone = document.querySelector('#effect-none');
@@ -23,7 +23,7 @@ slider.noUiSlider.on('update', () => {
 
 effectNone.addEventListener('click', () => {
   slider.classList.add('hidden');
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
 });
 
 effectChrome.addEventListener('click', () => {
@@ -36,9 +36,9 @@ effectChrome.addEventListener('click', () => {
     start: 1,
     step: 0.1
   });
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
   slider.noUiSlider.on('update', () => {
-    imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value})`;
+    imgUploadPreviewContainer.style.filter = `grayscale(${effectLevelValue.value})`;
   });
 });
 
@@ -52,9 +52,9 @@ effectSepia.addEventListener('click', () => {
     start: 1,
     step: 0.1
   });
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
   slider.noUiSlider.on('update', () => {
-    imgUploadPreview.style.filter = `sepia(${effectLevelValue.value})`;
+    imgUploadPreviewContainer.style.filter = `sepia(${effectLevelValue.value})`;
   });
 });
 
@@ -68,9 +68,9 @@ effectMarvin.addEventListener('click', () => {
     start: 100,
     step: 1
   });
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
   slider.noUiSlider.on('update', () => {
-    imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+    imgUploadPreviewContainer.style.filter = `invert(${effectLevelValue.value}%)`;
   });
 });
 
@@ -84,9 +84,9 @@ effectPhobos.addEventListener('click', () => {
     start: 3,
     step: 0.1
   });
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
   slider.noUiSlider.on('update', () => {
-    imgUploadPreview.style.filter = `blur(${effectLevelValue.value}px)`;
+    imgUploadPreviewContainer.style.filter = `blur(${effectLevelValue.value}px)`;
   });
 });
 
@@ -100,9 +100,9 @@ effectHeat.addEventListener('click', () => {
     start: 3,
     step: 0.1
   });
-  imgUploadPreview.style.filter = null;
+  imgUploadPreviewContainer.style.filter = null;
   slider.noUiSlider.on('update', () => {
-    imgUploadPreview.style.filter = `brightness(${effectLevelValue.value})`;
+    imgUploadPreviewContainer.style.filter = `brightness(${effectLevelValue.value})`;
   });
 });
 

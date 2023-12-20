@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
-import {validHashtag, hashtagMaxCount, hashtagErrorMessages, maxScaleValue} from './constants.js';
-import {setCurrentScale, imgUploadPreview} from './scale-picture.js';
+import {VALID_HASHTAG, HASHTAG_MAX_COUNT, HASHTAG_ERROR_MESSAGES, MAX_SCALE_VALUE} from './constants.js';
+import {setCurrentScale, imgUploadPreviewContainer} from './scale-picture.js';
 import {slider} from './filters.js';
 import {uploadData} from './fetch.js';
 
@@ -12,6 +12,8 @@ const closeFormButton = document.querySelector('.img-upload__cancel');
 const hashtagField = document.querySelector('.text__hashtags');
 const descriptionField = document.querySelector('.text__description');
 const imgUploadSubmit = document.querySelector('.img-upload__submit');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
+const effectsPreviewList = document.querySelectorAll('.effects__preview');
 
 const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
@@ -20,15 +22,15 @@ const pristine = new Pristine(uploadForm, {
 
 const getSplitedHashtags = (tags) => tags.toLowerCase().trim().split(/\s+/g);
 
-const isHashtagsValid = (tags) => getSplitedHashtags(tags).every((tag) => validHashtag.test(tag));
+const isHashtagsValid = (tags) => getSplitedHashtags(tags).every((tag) => VALID_HASHTAG.test(tag));
 
 const isHashtagsUnique = (tags) => getSplitedHashtags(tags).length === new Set(getSplitedHashtags(tags)).size;
 
-const isHashtagsLimited = (tags) => getSplitedHashtags(tags).length <= hashtagMaxCount;
+const isHashtagsLimited = (tags) => getSplitedHashtags(tags).length <= HASHTAG_MAX_COUNT;
 
-pristine.addValidator(hashtagField, isHashtagsValid, hashtagErrorMessages[0]);
-pristine.addValidator(hashtagField, isHashtagsUnique, hashtagErrorMessages[1]);
-pristine.addValidator(hashtagField, isHashtagsLimited, hashtagErrorMessages[2]);
+pristine.addValidator(hashtagField, isHashtagsValid, HASHTAG_ERROR_MESSAGES[0]);
+pristine.addValidator(hashtagField, isHashtagsUnique, HASHTAG_ERROR_MESSAGES[1]);
+pristine.addValidator(hashtagField, isHashtagsLimited, HASHTAG_ERROR_MESSAGES[2]);
 pristine.addValidator(descriptionField, (value) => value.length <= 140, 'Максимальная длина 140 символов');
 
 hashtagField.addEventListener('change', () => {
@@ -59,9 +61,9 @@ function openUploadModal () {
   uploadModal.classList.remove('hidden');
   body.classList.remove('modal-open');
 
-  setCurrentScale(maxScaleValue);
-  imgUploadPreview.style.transform = `scale(${maxScaleValue / 100})`;
-  imgUploadPreview.style.filter = null;
+  setCurrentScale(MAX_SCALE_VALUE);
+  imgUploadPreviewContainer.style.transform = `scale(${MAX_SCALE_VALUE / 100})`;
+  imgUploadPreviewContainer.style.filter = null;
   slider.classList.add('hidden');
 
   closeFormButton.addEventListener('click', closeUploadModal);
@@ -76,6 +78,15 @@ function closeUploadModal () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-uploadInput.addEventListener('change', openUploadModal);
+uploadInput.addEventListener('input', openUploadModal);
+
+uploadInput.addEventListener('change', () => {
+  const file = uploadInput.files[0];
+  const uploadInputUrl = URL.createObjectURL(file);
+  imgUploadPreview.src = uploadInputUrl;
+  for (const effectPreview of effectsPreviewList) {
+    effectPreview.style.backgroundImage = `url(${uploadInputUrl})`;
+  }
+});
 
 export {closeUploadModal, uploadModal, imgUploadSubmit};
